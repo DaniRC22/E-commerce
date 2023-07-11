@@ -1,10 +1,12 @@
+import Layout from "../../Components/Layout"
+
 function MyOrder() {
 
     return (
       <>
-       <div className="bg-green-500">
+       <Layout >
         myOrder 
-       </div>
+       </Layout>
       </>
     )
   }

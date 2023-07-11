@@ -1,10 +1,31 @@
+import { useState, useEffect } from "react"
+import Layout from "../../Components/Layout"
+import Card from "../../Components/Card"
 function Home() {
 
+    const [items, setItems] = useState(null)
+
+    useEffect(() => {
+      fetch('https://fakestoreapi.com/products')
+      .then(response => response.json())
+      .then(data => setItems(data))
+    },[])
+    
+    
     return (
       <>
-       <div className="bg-green-500">
+       <Layout>
         Home 
-       </div>
+        <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
+
+        {
+          items?.map(item => (
+            <Card key={item.id} data={item}/>
+          ))
+        }
+        </div>
+         
+       </Layout>
       </>
     )
   }
