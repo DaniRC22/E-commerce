@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import './style.css'
 import { ShoppingCartContext } from '../../Context'
 const ProductDetail = () => {
-    const context = useContext(ShoppingCartContext)
+const context = useContext(ShoppingCartContext)
 
     return (
         <aside 

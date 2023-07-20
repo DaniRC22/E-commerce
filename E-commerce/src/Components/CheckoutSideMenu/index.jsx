@@ -1,11 +1,18 @@
 import { useContext } from 'react'
 import './styles.css'
 import { ShoppingCartContext } from '../../Context'
+import OrderCard from '../OrderCard'
 
 const CheckoutSideMenu = () => {
-    const context = useContext(ShoppingCartContext)
+const context = useContext(ShoppingCartContext)
+   
+const handDelete = (id) =>{
+    const filteredProducts = context.cartProducts.filter(product => product.id != id)
+    context.setCartToProducts(filteredProducts)
+}   
 
-    return (
+
+return (
         <aside 
          className={`${context.isCheckoutSideMenuOpen ? 'flex' :  'hidden'} checkout-side-menu flex-col fixed right-0 border border-black rounded-lg bg-white`}>
             <div className='flex justify-between items-center p-6'>
@@ -17,15 +24,21 @@ const CheckoutSideMenu = () => {
                 </svg>
                 </button>
             </div>
-            <figure className='px-6'>
-                <img className='w-80 h-80 rounded-lg'
-                src={context.ProductToShow.image} alt={context.ProductToShow.tittle} />
-            </figure>
-            <p className='flex flex-col p-6'>
-                <span className='font-medium text-2xl mb-2'>${context.ProductToShow.price}</span>
-                <span className='font-medium text-md'>${context.ProductToShow.tittle}</span>
-                <span className='font-lifht text-sm'>${context.ProductToShow.description}</span>
-            </p>
+            <div className='px-6 overflow-y-scroll'>
+
+            {
+                context.cartProducts.map((product)=> (
+                    <OrderCard 
+                    key={product.id}
+                    id={product.id}
+                    title={product.title}
+                    imageUrl={product.image}
+                    price={product.price}
+                    handDelete={handDelete}
+                    />
+                ))
+            }
+            </div>
         </aside>
     )
 }
