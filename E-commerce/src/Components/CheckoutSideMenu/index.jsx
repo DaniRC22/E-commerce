@@ -23,6 +23,7 @@ const handleCheckout = ()=>{
 
     context.setOrder([...context.order, orderToAdd])
     context.setCartToProducts([])
+    context.setSearchByTitle(null)
 }
 
 
